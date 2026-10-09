@@ -1,10 +1,9 @@
-# Session 8 — Creating a Skill
+# Extra session — Creating a Skill
 
-Nishtha Jain · CRN 2315172 · URN 2302627 · Session held Tue 6 Oct 2026
+Nishtha Jain · CRN 2315172 · URN 2302627 · Additional session, Tue 6 Oct 2026
 
-> **Not the same as `session8-weather/`.** That folder is the weather API build,
-> which the homework form happened to label "Session 8". This folder is the
-> actual Session 8 class: making a Skill.
+> An **extra class**, outside the numbered run. Session 8 proper was the
+> third-party API session on Tue 22 Sep — that work is in `session8-weather/`.
 
 ---
 
@@ -78,11 +77,11 @@ name the situations that should trigger it, in the words you'd actually use.
 ## What goes in this folder
 
 ```
-session8-skill/
+extra-session-skill/
   README.md           this file
   skill/              the Skill itself
   evidence/           the off and on screenshots
-  Session-8-Skill.pdf the submission
+  Skill-Demo.pdf        the submission
 ```
 
 ## Before you submit
