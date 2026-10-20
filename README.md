@@ -1,92 +1,96 @@
-# Extra session — Creating a Skill
+# AI Project Idea Critic — a Claude Skill
 
-Nishtha Jain · CRN 2315172 · URN 2302627 · Additional session, Tue 6 Oct 2026
+Nishtha Jain · CRN 2315172 · URN 2302627
+Built in the additional session, Tue 6 Oct 2026
 
-> An **extra class**, outside the numbered run. Session 8 proper was the
-> third-party API session on Tue 22 Sep — that work is in `session8-weather/`.
+A Skill that evaluates a project idea instead of praising it. It scores the idea
+against a six-point rubric, says plainly whether it is worth building, and hands
+back a reshaped stronger version — as a scorecard page rather than a chat reply.
 
 ---
 
-## The homework
-
-Create a simple Skill and demonstrate its use case. Upload a PDF to your GitHub
-repo and share the URL.
-
-The PDF must contain:
-
-1. A short description of the Skill and what it does
-2. A screenshot of the Skill's structure
-3. **Screenshots comparing the output for the same prompt with the Skill turned
-   OFF versus turned ON**
-
-> *"The PDF should clearly demonstrate how the Skill improves or changes the
-> output."*
-
-## The whole grade is in the comparison
-
-Points 1 and 2 are description. Point 3 is the evidence, and it only works if
-**one variable changes**. Same prompt, same wording, same typos, run twice —
-once with the Skill off, once on. If the prompt differs even slightly between
-the two screenshots, the comparison proves nothing and the marker can see it.
-
-So the Skill has to be chosen for a task where the *off* answer is visibly
-inadequate. A Skill that makes a good answer slightly better photographs badly.
-
-## Choosing a Skill worth demonstrating
-
-The ones that show a stark before/after are those encoding knowledge Claude
-cannot guess:
-
-- **A house style or format** — without it, generic structure; with it, your
-  exact sections, headings and tone, every time.
-- **A checklist or review standard** — without it, vague praise; with it, the
-  same specific checks every run.
-- **Domain rules** — without it, a plausible answer that breaks a rule; with it,
-  the rule held.
-
-The sharpest demo is a prompt where the off version is *confidently wrong* in a
-way the on version fixes.
-
-### From your own work
-
-Three things already in this folder's neighbourhood would make honest Skills,
-because the rules are real and already written down:
-
-| Skill | Would encode | Off vs on |
-|---|---|---|
-| **Business card → bot** | The Session 10 structure: facts, rules, never-do, priority enquiries | Off: a vague chatbot brief. On: a card the kit can actually consume. |
-| **Client fact discipline** | Your Panwar rules — never invent a fact, mark gaps `TODO: confirm with client`, never publish a masked GST or a proxy phone number | Off: invented MOQs and lead times. On: visible TODOs where the data is missing. |
-| **Prompt log entry** | The `prompt.md` format — verbatim prompt, what it produced, honest assessment, time estimate vs actual | Off: a tidy summary. On: the real prompt with its typos and a note on what didn't work. |
-
-The second one has the best demo: ask for a supplier page for a business with
-gaps in its public data. Without the Skill you get confident invented numbers.
-With it, you get `TODO: confirm with client`. That difference is obvious in a
-screenshot and it's a real lesson, not a formatting trick.
-
-## Structure of a Skill
+## The Skill
 
 ```
-skill-name/
-  SKILL.md        name, description, and the instructions
-  (optional)      reference files the skill tells Claude to read
+skill/ai-project-idea-critic/
+  SKILL.md                  name, description, and the instructions
+  references/rubric.md      the six scoring criteria, read at step 2
 ```
 
-The `description` is what decides whether the Skill fires at all — it has to
-name the situations that should trigger it, in the words you'd actually use.
+**What it does.** When someone shares a project idea, the Skill makes Claude:
 
-## What goes in this folder
+1. Score it against six criteria — problem, AI necessity, originality,
+   feasibility, data availability, portfolio value
+2. Give a verdict: **Weak**, **Promising** or **Strong**
+3. State what would have to be true for it to be worth building
+4. Propose a named, scoped, reshaped version
+5. Make the call: **Build / Reshape / Drop**
+6. Render all of it as a shareable scorecard artifact
+7. **Stop there** — no implementation unless asked
+
+Two guardrails are written into it: *judge the idea, never the person*, and
+*the verdict follows the evidence* — a genuinely strong idea gets a strong
+verdict. It is an evaluator, not a no-machine.
+
+## Why this one demonstrates well
+
+The homework wants the same prompt run twice, Skill off and Skill on, with a
+visible difference.
+
+Default behaviour is the problem this Skill was built for: share an idea and
+Claude tends to accept it and start describing how to build it. The Skill
+replaces that with a scored judgement and a reshaped alternative.
+
+So the difference is **structural**, not stylistic — a chat reply versus a
+scored scorecard page. That reads clearly in a screenshot.
+
+---
+
+## The demo
+
+**Use exactly this prompt, both times. Word for word.**
+
+> I want to build an AI chatbot for my college canteen that answers questions about the menu.
+
+It is deliberately a generic idea, because generic is where the two behaviours
+diverge most.
+
+| | Expected |
+|---|---|
+| **Skill OFF** | Encouragement, then a tech stack and a build plan. No judgement on whether it is worth building. |
+| **Skill ON** | Verdict (likely **Weak**), six scores out of 5, what would have to be true, a reshaped version, and Build/Reshape/Drop. Plus the scorecard artifact. |
+
+### Screenshots needed
+
+Save into `evidence/`:
+
+| File | What it shows |
+|---|---|
+| `01-structure.png` | The Skill's structure — `SKILL.md` and `references/rubric.md` visible, not just a folder name |
+| `02-skill-off.png` | The prompt and Claude's answer, Skill disabled |
+| `03-skill-on.png` | The same prompt and Claude's answer, Skill enabled |
+
+**The whole demonstration rests on one variable changing.** Same prompt, same
+wording, same punctuation. If the two prompts differ, the comparison proves
+nothing and it is visible to anyone reading.
+
+Turn the Skill off at Settings → Capabilities → Skills, run the prompt, turn it
+back on, run it again in a fresh chat.
+
+---
+
+## Submission
+
+The form asks for a **GitHub repo containing the Skill documentation PDF and the
+Skill file**.
 
 ```
 extra-session-skill/
-  README.md           this file
-  skill/              the Skill itself
-  evidence/           the off and on screenshots
-  Skill-Demo.pdf        the submission
+  README.md                      this file
+  skill/ai-project-idea-critic/  the Skill
+  evidence/                      the three screenshots
+  Skill-Demo-Nishtha-Jain.pdf    the documentation PDF
 ```
 
-## Before you submit
-
-- Same prompt in both screenshots, word for word
-- The structure screenshot shows `SKILL.md`, not just a folder name
-- The difference is visible without reading closely
-- PDF in the repo, and the URL shared
+The PDF needs a short explanation, the structure screenshot, and the before and
+after screenshots — enough to show how the Skill changes the output.
